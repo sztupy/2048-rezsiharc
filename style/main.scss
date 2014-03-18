@@ -48,6 +48,18 @@ h1.title {
   float: left;
 }
 
+h2.title {
+  font-size: 60px;
+  font-weight: bold;
+  margin: 0;
+  display: block;
+  float: left;
+}
+
+img {
+  max-width: 100%;
+}
+
 @include keyframes(move-up) {
   0% {
     top: 25px;
@@ -81,7 +93,7 @@ h1.title {
   margin-top: 8px;
   text-align: center;
 
-  &:after {
+  &:before {
     position: absolute;
     width: 100%;
     top: 10px;
@@ -104,15 +116,26 @@ h1.title {
     z-index: 100;
     @include animation(move-up 600ms ease-in);
     @include animation-fill-mode(both);
+    &:after {
+      content: "Ft"
+    }
   }
 }
 
+.score-container:before {
+  content: "Rezsi";
+}
+
+.best-container:before {
+  content: "Legjobb"
+}
+
 .score-container:after {
-  content: "Score";
+  content: "Ft";
 }
 
 .best-container:after {
-  content: "Best"
+  content: "Ft"
 }
 
 p {
@@ -206,14 +229,14 @@ hr {
         font-weight: bold;
         height: 60px;
         line-height: 60px;
-        margin-top: 222px;
+        margin-top: 150px;
         // height: $field-width;
         // line-height: $field-width;
       }
 
       .lower {
         display: block;
-        margin-top: 59px;
+        margin-top: 150px;
       }
 
       a {
@@ -290,6 +313,10 @@ hr {
       line-height: $tile-size + 10px;
     }
 
+    .tile-inner:after {
+      content: "Ft"
+    }
+
     // Build position classes
     @for $x from 1 through $grid-row-cells {
       @for $y from 1 through $grid-row-cells {
@@ -317,7 +344,7 @@ hr {
     font-weight: bold;
     z-index: 10;
 
-    font-size: 55px;
+    font-size: 45px;
   }
 
   // Movement transition
@@ -345,7 +372,7 @@ hr {
 
   // Build tile colors
   @while $exponent <= $limit {
-    $power: pow($base, $exponent);
+    $power: pow($base, 12-$exponent);
 
     &.tile-#{$power} .tile-inner {
       // Calculate base background color
@@ -378,17 +405,17 @@ hr {
 
       // Adjust font size for bigger numbers
       @if $power >= 100 and $power < 1000 {
-        font-size: 45px;
+        font-size: 30px;
 
         // Media queries placed here to avoid carrying over the rest of the logic
         @include smaller($mobile-threshold) {
-          font-size: 25px;
+          font-size: 15px;
         }
       } @else if $power >= 1000 {
-        font-size: 35px;
+        font-size: 25px;
 
         @include smaller($mobile-threshold) {
-          font-size: 15px;
+          font-size: 10px;
         }
       }
     }
@@ -401,7 +428,7 @@ hr {
     color: $bright-text-color;
     background: mix(#333, $tile-gold-color, 95%);
 
-    font-size: 30px;
+    font-size: 20px;
 
     @include smaller($mobile-threshold) {
       font-size: 10px;
